@@ -11,6 +11,12 @@ URL:		http://www.gegl.org/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
+BuildRequires:  babl-devel
+BuildRequires:  glib2-devel
+BuildRequires:  png-devel
+BuildRequires:  pango-devel
+BuildRequires:  ImageMagick
+
 %description
 
 GEGL (Generic Graphics Library) is a graph based image processing 
