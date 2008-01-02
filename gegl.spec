@@ -9,6 +9,7 @@ Group:		System/Libraries
 License:	GPL
 URL:		http://www.gegl.org/
 Source0:	%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:  babl-devel
 BuildRequires:  glib2-devel
