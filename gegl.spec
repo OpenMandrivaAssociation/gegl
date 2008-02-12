@@ -18,7 +18,6 @@ BuildRequires:  pango-devel
 BuildRequires:  ImageMagick
 
 %description
-
 GEGL (Generic Graphics Library) is a graph based image processing 
 framework.
 
