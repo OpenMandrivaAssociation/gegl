@@ -1,8 +1,9 @@
 %define major 0
 %define libname %mklibname %name %{major}
+%define develname %mklibname -d %name
 
 Name:		gegl
-Version:	0.0.12
+Version:	0.0.16
 Release:	%mkrel 1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
@@ -50,19 +51,20 @@ have minimal dependencies. and a simple well defined API.
 
 %files -n     %{libname}
 %defattr(-,root,root)
-%_libdir/libgegl-1.0.so.0
-%_libdir/libgegl-1.0.so.0.%{major}.0
+%_libdir/libgegl-0.0.so.%{major}
+%_libdir/libgegl-0.0.so.%{major}*
+%_libdir/gegl-0.0/
 
 #--------------------------------------------------------------------
 
-%package -n     %{libname}-devel
+%package -n     %{develname}
 Summary:        Header files for %name
 Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
 Provides:       lib%{name}-devel = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 GEGL (Generic Graphics Library) is a graph based image processing
 framework.
 
@@ -70,17 +72,13 @@ GEGLs original design was made to scratch GIMPs itches for a new
 compositing and processing core. This core is being designed to
 have minimal dependencies. and a simple well defined API.
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
-%_libdir/gegl-1.0/*.so
-%dir  %_includedir/gegl-1.0
-%dir  %_includedir/gegl-1.0/%name
-%_includedir/gegl-1.0/*.h
-%_includedir/gegl-1.0/%name/*.h
-%_libdir/pkgconfig/gegl.pc
-%_libdir/libgegl-1.0.a
-%_libdir/libgegl-1.0.la
-%_libdir/libgegl-1.0.so
+%doc %{_datadir}/gtk-doc/html/%{name}
+%_libdir/*.so
+%_libdir/*.la
+%_includedir/gegl-0.0/
+%_libdir/pkgconfig/%{name}.pc
 #--------------------------------------------------------------------
 
 %prep
@@ -88,7 +86,7 @@ have minimal dependencies. and a simple well defined API.
 %setup -q 
 %build
 
-%configure
+%configure --enable-workshop
 %make
 
 %install
