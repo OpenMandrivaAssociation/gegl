@@ -17,6 +17,13 @@ BuildRequires:  glib2-devel
 BuildRequires:  png-devel
 BuildRequires:  pango-devel
 BuildRequires:  ImageMagick
+BuildRequires:	ruby
+BuildRequires:	librsvg2-devel
+BuildRequires:	OpenEXR-devel
+BuildRequires:	lua-devel
+BuildRequires:	enscript
+BuildRequires:	w3m
+BuildRequires:	graphviz
 
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
