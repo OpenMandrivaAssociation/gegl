@@ -27,6 +27,7 @@ BuildRequires:	graphviz
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL-devel
 BuildRequires:	ffmpeg-devel
+BuildRequires:	jpeg-devel
 
 
 %description
