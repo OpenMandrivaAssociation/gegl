@@ -24,6 +24,10 @@ BuildRequires:	lua-devel
 BuildRequires:	enscript
 BuildRequires:	w3m
 BuildRequires:	graphviz
+BuildRequires:	gtk2-devel
+BuildRequires:	SDL-devel
+BuildRequires:	ffmpeg-devel
+
 
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
