@@ -4,7 +4,7 @@
 
 Name:		gegl
 Version:	0.0.16
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	GPL
@@ -26,7 +26,7 @@ BuildRequires:	w3m
 BuildRequires:	graphviz
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL-devel
-BuildRequires:	ffmpeg-devel
+#BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
 
 
@@ -98,7 +98,7 @@ have minimal dependencies. and a simple well defined API.
 %setup -q 
 %build
 
-%configure --enable-workshop
+%configure2_5x --enable-workshop
 %make
 
 %install
