@@ -4,12 +4,13 @@
 
 Name:		gegl
 Version:	0.0.16
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	GPL
 URL:		http://www.gegl.org/
 Source0:	%{name}-%{version}.tar.bz2
+Patch: gegl-0.0.16-new-ffmpeg.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:  babl-devel
@@ -26,7 +27,8 @@ BuildRequires:	w3m
 BuildRequires:	graphviz
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL-devel
-#BuildRequires:	ffmpeg-devel
+#gw warning: this needs the deprecated libavcodec scaler (img_resample,...)
+BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
 
 
@@ -96,6 +98,8 @@ have minimal dependencies. and a simple well defined API.
 %prep
 
 %setup -q 
+%patch -p1
+
 %build
 
 %configure2_5x --enable-workshop
