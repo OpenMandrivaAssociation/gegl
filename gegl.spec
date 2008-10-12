@@ -24,7 +24,6 @@ BuildRequires:	librsvg2-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	lua-devel
 BuildRequires:	enscript
-BuildRequires:	w3m
 BuildRequires:	graphviz
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL-devel
