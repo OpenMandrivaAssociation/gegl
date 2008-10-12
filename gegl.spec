@@ -3,14 +3,14 @@
 %define develname %mklibname -d %name
 
 Name:		gegl
-Version:	0.0.18
+Version:	0.0.20
 Release:	%mkrel 1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
 Source0:	%{name}-%{version}.tar.bz2
-Patch: gegl-0.0.16-new-ffmpeg.patch
+Patch: gegl-0.0.20-new-ffmpeg.patch
 Patch1: gegl-0.0.18-glib-build.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
