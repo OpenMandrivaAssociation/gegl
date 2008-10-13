@@ -4,7 +4,7 @@
 
 Name:		gegl
 Version:	0.0.20
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
@@ -70,7 +70,7 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
-%patch -p1
+%patch -p1 -b .new-ffmpeg
 %patch1 -p1
 autoconf
 
