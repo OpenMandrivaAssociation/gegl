@@ -19,7 +19,7 @@ BuildRequires:  babl-devel >= 0.0.22
 BuildRequires:  glib2-devel
 BuildRequires:  png-devel
 BuildRequires:  pango-devel
-BuildRequires:  ImageMagick
+BuildRequires:  imagemagick
 BuildRequires:	ruby
 BuildRequires:	librsvg2-devel
 BuildRequires:	OpenEXR-devel
