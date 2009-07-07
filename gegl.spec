@@ -3,16 +3,16 @@
 %define develname %mklibname -d %name
 
 Name:		gegl
-Version:	0.0.22
+Version:	0.1.0
 Release:	%mkrel 1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-BuildRequires:  babl-devel >= 0.0.22
+BuildRequires:  babl-devel >= 0.1.0
 BuildRequires:  glib2-devel
 BuildRequires:  png-devel
 BuildRequires:  pango-devel
