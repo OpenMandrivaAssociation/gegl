@@ -1,10 +1,11 @@
 %define major 0
-%define libname %mklibname %name %{major}
-%define develname %mklibname -d %name
+%define api 0.1
+%define libname %mklibname %{name} %{api}_%{major}
+%define develname %mklibname -d %{name} %{api}
 
 Name:		gegl
-Version:	0.1.0
-Release:	%mkrel 3
+Version:	0.1.2
+Release:	%mkrel 1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
@@ -12,7 +13,7 @@ URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-BuildRequires:  babl-devel >= 0.1.0
+BuildRequires:  babl-devel >= 0.1.2
 BuildRequires:  glib2-devel
 BuildRequires:  png-devel
 BuildRequires:  pango-devel
@@ -25,6 +26,7 @@ BuildRequires:	enscript
 BuildRequires:	graphviz
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL-devel
+BuildRequires:	libopenraw-devel
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
@@ -57,6 +59,7 @@ Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
 Provides:       lib%{name}-devel = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
+Obsoletes:      %{_lib}%{name}-devel
 
 %description -n %{develname}
 GEGL (Generic Graphics Library) is a graph based image processing
@@ -92,8 +95,8 @@ rm -fr %buildroot
 %files -n     %{libname}
 %defattr(-,root,root)
 %doc README AUTHORS NEWS
-%_libdir/libgegl-0.0.so.%{major}*
-%_libdir/gegl-0.0/
+%_libdir/libgegl-%{api}.so.%{major}*
+%_libdir/gegl-%{api}/
 
 %files -n %{develname}
 %defattr(-,root,root)
@@ -101,6 +104,6 @@ rm -fr %buildroot
 %doc %{_datadir}/gtk-doc/html/%{name}
 %_libdir/*.so
 %_libdir/*.la
-%_includedir/gegl-0.0/
+%_includedir/gegl-%{api}/
 %_libdir/pkgconfig/%{name}.pc
 
