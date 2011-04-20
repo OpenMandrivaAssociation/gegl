@@ -4,16 +4,17 @@
 %define develname %mklibname -d %{name} %{api}
 
 Name:		gegl
-Version:	0.1.2
-Release:	%mkrel 2
+Version:	0.1.6
+Release:	%mkrel 1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
+Patch0:		gegl-0.1.6-gtkdochtml.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-BuildRequires:  babl-devel >= 0.1.2
+BuildRequires:  babl-devel >= 0.1.4
 BuildRequires:  glib2-devel
 BuildRequires:  png-devel
 BuildRequires:  pango-devel
@@ -71,6 +72,7 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
+%patch0 -p1	-b .destdir
 
 %build
 %configure2_5x --enable-workshop
