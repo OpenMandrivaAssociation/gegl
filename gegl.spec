@@ -5,15 +5,14 @@
 
 Name:		gegl
 Version:	0.1.6
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
 Patch0:		gegl-0.1.6-gtkdochtml.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
+Patch1:		gegl-0.1.6-ffmpeg.diff
 BuildRequires:  babl-devel >= 0.1.4
 BuildRequires:  glib2-devel
 BuildRequires:  png-devel
@@ -31,6 +30,7 @@ BuildRequires:	libopenraw-devel
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 
 %description
@@ -72,7 +72,8 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
-%patch0 -p1	-b .destdir
+%patch0 -p1 -b .destdir
+%patch1 -p1 -b .ffmpeg
 
 %build
 %configure2_5x --enable-workshop
@@ -84,11 +85,6 @@ rm -rf %buildroot
 
 %clean
 rm -fr %buildroot
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files
 %defattr(-,root,root)
@@ -108,4 +104,3 @@ rm -fr %buildroot
 %_libdir/*.la
 %_includedir/gegl-%{api}/
 %_libdir/pkgconfig/%{name}.pc
-
