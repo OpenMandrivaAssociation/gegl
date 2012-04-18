@@ -1,17 +1,16 @@
 %define major 0
-%define api 0.1
+%define api 0.2
 %define libname %mklibname %{name} %{api}_%{major}
 %define develname %mklibname -d %{name} %{api}
 
 Name:		gegl
-Version:	0.1.8
+Version:	0.2.0
 Release:	1
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
-Patch1:		gegl-0.1.8-ffmpeg.diff
 
 BuildRequires:	enscript
 BuildRequires:	graphviz
@@ -21,7 +20,7 @@ BuildRequires:	ruby
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
-BuildRequires:  pkgconfig(babl) >= 0.1.6
+BuildRequires:  pkgconfig(babl) >= 0.1.10
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libopenraw-1.0)
@@ -69,10 +68,13 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
-%apply_patches
 
 %build
-%configure2_5x --enable-workshop
+sed -i -e 's/\.dylib/.bundle/' configure.ac || die
+autoreconf -fi
+%configure2_5x --enable-workshop \
+	       --with-pango --with-gdk-pixbuf \
+	       --without-libspiro --disable-docs 
 %make
 
 %install
@@ -84,14 +86,14 @@ find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 %doc README AUTHORS NEWS
 %{_bindir}/gegl
 %{_libdir}/gegl-%{api}/*.so
+%{_datadir}/locale/*/LC_MESSAGES/*.mo
 
 %files -n     %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
 
 %files -n %{develname}
 %doc ChangeLog
-%doc %{_datadir}/gtk-doc/html/%{name}
+#% doc %{_datadir}/gtk-doc/html/%{name}
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
-%{_libdir}/pkgconfig/%{name}.pc
-
+%{_libdir}/pkgconfig/%{name}-%{api}.pc
