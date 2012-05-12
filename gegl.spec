@@ -1,16 +1,16 @@
 %define major 0
 %define api 0.2
 %define libname %mklibname %{name} %{api}_%{major}
-%define develname %mklibname -d %{name} %{api}
+%define develname %mklibname -d %{name}
 
+Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
 Release:	1
-Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
-Source0:	ftp://ftp.gimp.org/pub/gegl/0.1/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
 
 BuildRequires:	enscript
 BuildRequires:	graphviz
@@ -72,9 +72,12 @@ have minimal dependencies. and a simple well defined API.
 %build
 sed -i -e 's/\.dylib/.bundle/' configure.ac || die
 autoreconf -fi
-%configure2_5x --enable-workshop \
-	       --with-pango --with-gdk-pixbuf \
-	       --without-libspiro --disable-docs 
+%configure2_5x \
+	--enable-workshop \
+	--with-pango \
+	--with-gdk-pixbuf \
+	--without-libspiro \
+	--disable-docs 
 %make
 
 %install
