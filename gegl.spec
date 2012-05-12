@@ -13,6 +13,7 @@ URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
 
 BuildRequires:	enscript
+BuildRequires:	intltool
 BuildRequires:	graphviz
 BuildRequires:  imagemagick
 BuildRequires:	pango-modules
