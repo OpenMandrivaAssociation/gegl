@@ -6,7 +6,7 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
-Release:	1
+Release:	2
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
@@ -57,7 +57,6 @@ Summary:        Header files for %{name}
 Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
-Obsoletes:      %{_lib}%{name}-devel
 
 %description -n %{develname}
 GEGL (Generic Graphics Library) is a graph based image processing
@@ -69,10 +68,10 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
-
-%build
 sed -i -e 's/\.dylib/.bundle/' configure.ac || die
 autoreconf -fi
+
+%build
 %configure2_5x \
 	--enable-workshop \
 	--with-pango \
@@ -82,7 +81,6 @@ autoreconf -fi
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
@@ -97,7 +95,7 @@ find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 %files -n %{develname}
 %doc ChangeLog
-#% doc %{_datadir}/gtk-doc/html/%{name}
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
+
