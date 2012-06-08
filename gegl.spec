@@ -11,6 +11,7 @@ Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
+Patch0:		gegl-0.2.0-ffmpeg-0.11.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -68,6 +69,7 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
+%patch0 -p1 -b .ffmpeg11~
 sed -i -e 's/\.dylib/.bundle/' configure.ac || die
 autoreconf -fi
 
