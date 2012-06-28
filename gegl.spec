@@ -1,7 +1,7 @@
-%define major 0
-%define api 0.2
-%define libname %mklibname %{name} %{api}_%{major}
-%define develname %mklibname -d %{name}
+%define	major	0
+%define	api	0.2
+%define	libname	%mklibname %{name} %{api}_%{major}
+%define	devname	%mklibname -d %{name}
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
@@ -16,21 +16,21 @@ Patch0:		gegl-0.2.0-ffmpeg-0.11.patch
 BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz
-BuildRequires:  imagemagick
+BuildRequires:	imagemagick
 BuildRequires:	pango-modules
 BuildRequires:	ruby
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
-BuildRequires:  pkgconfig(babl) >= 0.1.10
-BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(babl) >= 0.1.10
+BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libopenraw-1.0)
-BuildRequires:  pkgconfig(libpng15)
+BuildRequires:	pkgconfig(libpng15)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
-BuildRequires:  pkgconfig(pangocairo)
+BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(sdl)
 
 %description
@@ -42,10 +42,10 @@ compositing and processing core. This core is being designed to
 have minimal dependencies. and a simple well defined API. 
 
 %package -n     %{libname}
-Summary:        A library for %{name}
-Group:          System/Libraries
+Summary:	A library for %{name}
+Group:		System/Libraries
 
-%description -n %{libname}
+%description -n	%{libname}
 GEGL (Generic Graphics Library) is a graph based image processing
 framework.
 
@@ -53,13 +53,13 @@ GEGLs original design was made to scratch GIMPs itches for a new
 compositing and processing core. This core is being designed to
 have minimal dependencies. and a simple well defined API.
 
-%package -n     %{develname}
-Summary:        Header files for %{name}
-Group:          Development/C
-Requires:       %{libname} = %{version}-%{release}
-Provides:       %{name}-devel = %{version}-%{release}
+%package -n	%{devname}
+Summary:	Header files for %{name}
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{develname}
+%description -n	%{devname}
 GEGL (Generic Graphics Library) is a graph based image processing
 framework.
 
@@ -70,7 +70,7 @@ have minimal dependencies. and a simple well defined API.
 %prep
 %setup -q 
 %patch0 -p1 -b .ffmpeg11~
-sed -i -e 's/\.dylib/.bundle/' configure.ac || die
+sed -e 's/\.dylib/.bundle/' -i configure.ac || die
 autoreconf -fi
 
 %build
@@ -84,17 +84,17 @@ autoreconf -fi
 
 %install
 %makeinstall_std
-%find_lang %{name}-0.2
+%find_lang %{name}-%{api}
 
-%files -f %{name}-0.2.lang
+%files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
 %{_bindir}/gegl
 %{_libdir}/gegl-%{api}/*.so
 
-%files -n     %{libname}
+%files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc ChangeLog
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
