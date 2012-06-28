@@ -84,12 +84,12 @@ autoreconf -fi
 
 %install
 %makeinstall_std
+%find_lang %{name}-0.2
 
-%files
+%files -f %{name}-0.2.lang
 %doc README AUTHORS NEWS
 %{_bindir}/gegl
 %{_libdir}/gegl-%{api}/*.so
-%{_datadir}/locale/*/LC_MESSAGES/*.mo
 
 %files -n     %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
@@ -99,4 +99,3 @@ autoreconf -fi
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
-
