@@ -6,7 +6,7 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
-Release:	4
+Release:	5
 Group:		System/Libraries
 License:	LGPLv3+
 URL:		http://www.gegl.org/
@@ -84,7 +84,6 @@ autoreconf -fi
 
 %install
 %makeinstall_std
-find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 %files
 %doc README AUTHORS NEWS
