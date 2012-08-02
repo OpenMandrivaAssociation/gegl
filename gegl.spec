@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(babl) >= 0.1.10
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libopenraw-1.0)
-BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	libpng-devel
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
