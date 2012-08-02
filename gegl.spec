@@ -87,6 +87,9 @@ autoreconf -fi
 %install
 %makeinstall_std
 %find_lang %{name}-%{api}
+#gw not done automatically in 2011:
+rm -f %buildroot%_libdir/*.la
+rm -f %buildroot%_libdir/gegl-%{api}/*.la
 
 %files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
