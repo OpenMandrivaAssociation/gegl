@@ -69,7 +69,9 @@ have minimal dependencies. and a simple well defined API.
 
 %prep
 %setup -q 
+%if %mdvver >= 201200
 %patch0 -p1 -b .ffmpeg11~
+%endif
 sed -e 's/\.dylib/.bundle/' -i configure.ac || die
 autoreconf -fi
 
