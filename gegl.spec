@@ -1,5 +1,5 @@
-%define	major	0
 %define	api	0.2
+%define	major	0
 %define	libname	%mklibname %{name} %{api}_%{major}
 %define	devname	%mklibname -d %{name}
 
@@ -9,7 +9,7 @@ Version:	0.2.0
 Release:	5
 Group:		System/Libraries
 License:	LGPLv3+
-URL:		http://www.gegl.org/
+Url:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
 Patch0:		gegl-0.2.0-ffmpeg-0.11.patch
 
@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(babl) >= 0.1.10
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libopenraw-1.0)
-BuildRequires:	libpng-devel
+BuildRequires:	pkgconfig(libpng15)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
@@ -46,12 +46,7 @@ Summary:	A library for %{name}
 Group:		System/Libraries
 
 %description -n	%{libname}
-GEGL (Generic Graphics Library) is a graph based image processing
-framework.
-
-GEGLs original design was made to scratch GIMPs itches for a new
-compositing and processing core. This core is being designed to
-have minimal dependencies. and a simple well defined API.
+This package contains a shared library for %{name}.
 
 %package -n	%{devname}
 Summary:	Header files for %{name}
@@ -60,18 +55,11 @@ Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
-GEGL (Generic Graphics Library) is a graph based image processing
-framework.
-
-GEGLs original design was made to scratch GIMPs itches for a new
-compositing and processing core. This core is being designed to
-have minimal dependencies. and a simple well defined API.
+This package contains the development files for %{name}.
 
 %prep
 %setup -q 
-%if %mdvver >= 201200
-%patch0 -p1 -b .ffmpeg11~
-%endif
+%apply_patches
 sed -e 's/\.dylib/.bundle/' -i configure.ac || die
 autoreconf -fi
 
@@ -87,9 +75,6 @@ autoreconf -fi
 %install
 %makeinstall_std
 %find_lang %{name}-%{api}
-#gw not done automatically in 2011:
-rm -f %buildroot%_libdir/*.la
-rm -f %buildroot%_libdir/gegl-%{api}/*.la
 
 %files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
@@ -104,3 +89,4 @@ rm -f %buildroot%_libdir/gegl-%{api}/*.la
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
+
