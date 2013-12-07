@@ -6,7 +6,7 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
-Release:	10
+Release:	11
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
