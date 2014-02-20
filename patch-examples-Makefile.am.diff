@@ -1,0 +1,13 @@
+--- gegl-0.2.0/examples/Makefile.am.0005~	2012-03-24 19:22:29.000000000 +0100
++++ gegl-0.2.0/examples/Makefile.am	2014-02-20 14:46:02.439077314 +0100
+@@ -15,8 +15,8 @@ gegl_lt_ccld_v_0 = @echo "  CCLD   " $@;
+ all-local: $(bins)
+ 
+ %: %.c $(GEGLHEADERS)
+-	$(gegl_lt_cc_v) $(LIBTOOL) --quiet --mode=compile $(CC) $(DEFS) -I. -I$(top_builddir) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o $@.lo $< 
+-	$(gegl_lt_ccld_v) $(LIBTOOL) --quiet --mode=link $(CC) $(AM_LDFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $@.lo $(LIBS)
++	$(gegl_lt_cc_v) $(LIBTOOL) --quiet --tag=CC --mode=compile $(CC) $(DEFS) -I. -I$(top_builddir) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o $@.lo $< 
++	$(gegl_lt_ccld_v) $(LIBTOOL) --quiet --tag=CC --mode=link $(CC) $(AM_LDFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $@.lo $(LIBS)
+ 
+ clean-local:
+ 	rm -f *.lo $(bins)
