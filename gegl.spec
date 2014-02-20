@@ -15,7 +15,9 @@ Patch0:		gegl-0.2.0-ffmpeg-2.1.patch
 Patch1:		gegl-0.2.0-lua-5.2.patch
 Patch2:		gegl-0.2.0-CVE-2012-4433.patch
 Patch3:		gegl-0.2.0-remove-src-over-op.patch
-Patch4:		gegl-fix-introspection.patch
+Patch4:		patch-configure.ac.diff
+Patch5:		patch-examples-Makefile.am.diff
+#Patch6:		gegl-fix-introspection.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
