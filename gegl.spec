@@ -11,23 +11,35 @@ Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-Patch0:		gegl-0.2.0-ffmpeg-0.11.patch
+Patch0:		gegl-0.2.0-ffmpeg-2.1.patch
+Patch1:		gegl-0.2.0-lua-5.2.patch
+Patch2:		gegl-0.2.0-CVE-2012-4433.patch
+Patch3:		gegl-0.2.0-remove-src-over-op.patch
+Patch4:		gegl-fix-introspection.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz
 BuildRequires:	imagemagick
 BuildRequires:	pango-modules
+BuildRequires:	perl-devel
 BuildRequires:	ruby
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
+BuildRequires:	suitesparse-common-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.10
+BuildRequires:	pkgconfig(cairo)
+BuildRequires:	pkgconfig(exiv2)
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(lensfun)
+BuildRequires:	pkgconfig(libavformat)
 BuildRequires:	pkgconfig(libopenraw-1.0)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(pangocairo)
@@ -68,13 +80,36 @@ autoreconf -fi
 	--enable-workshop \
 	--with-pango \
 	--with-gdk-pixbuf \
-	--without-libspiro \
-	--disable-docs 
+	--disable-docs  \
+	--with-pic \
+	--with-gio \
+	--with-gtk \
+	--with-cairo \
+	--with-pangocairo \
+	--with-lensfun \
+	--with-libjpeg \
+	--with-libpng \
+	--with-librsvg \
+	--with-openexr \
+	--with-sdl \
+	--with-libopenraw \
+	--with-jasper \
+	--with-graphviz \
+	--with-lua \
+	--with-libavformat \
+	--with-libv4l \
+	--with-libspiro \
+	--with-exiv2 \
+	--with-umfpack
+
 %make
 
 %install
 %makeinstall_std
 %find_lang %{name}-%{api}
+
+%check
+%make check
 
 %files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
