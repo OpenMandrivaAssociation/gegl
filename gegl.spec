@@ -1,23 +1,26 @@
-%define	api	0.2
+%define	api	0.3
 %define	major	0
-%define	libname	%mklibname %{name} %{api}_%{major}
-%define	devname	%mklibname -d %{name}
+%define	libname	%mklibname %{name} %{api} %{major}
+%define	devname	%mklibname -d %{name} %{api}
+
+%define	girname	%mklibname %{name}-gir %{api}
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.2.0
-Release:	14
+Version:	0.3.0
+%define	gitdate	20140219
+Release:	%{?gitdate:0.%{gitdate}.}1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
-Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-Patch0:		gegl-0.2.0-ffmpeg-2.1.patch
-Patch1:		gegl-0.2.0-lua-5.2.patch
-Patch2:		gegl-0.2.0-CVE-2012-4433.patch
-Patch3:		gegl-0.2.0-remove-src-over-op.patch
-Patch4:		patch-configure.ac.diff
-Patch5:		patch-examples-Makefile.am.diff
-#Patch6:		gegl-fix-introspection.patch
+# git clone git://git.gnome.org/gegl
+Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
+Patch0:		gegl-0.3.0-ffmpeg-2.1.patch
+Patch1:		0001-v4l-use-pkg-config-to-look-for-v4l2.patch
+Patch2:		0002-v4l-use-a-non-ancient-v4l-implementation.patch
+Patch3:		0003-check-for-kernel-videodev-not-libv4l.patch
+Patch4:		0004-add-autoconf-check-for-libv4l2.patch
+Patch5:		gegl-0.3.0-matting-leving-missing-linkage.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -26,11 +29,10 @@ BuildRequires:	imagemagick
 BuildRequires:	pango-modules
 BuildRequires:	perl-devel
 BuildRequires:	ruby
-#gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
-BuildRequires:	ffmpeg-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	suitesparse-common-devel
-BuildRequires:	pkgconfig(babl) >= 0.1.10
+BuildRequires:	umfpack-devel
+BuildRequires:	pkgconfig(babl) >= 0.1.11
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
@@ -42,6 +44,7 @@ BuildRequires:	pkgconfig(libopenraw-1.0)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libv4l2)
+BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(pangocairo)
@@ -71,10 +74,16 @@ Provides:	%{name}-devel = %{version}-%{release}
 %description -n	%{devname}
 This package contains the development files for %{name}.
 
+%package -n	%{girname}
+Summary:	GObject Introspection interface description for %{name}
+Group:		System/Libraries
+
+%description -n	%{girname}
+GObject Introspection interface description for %{name}.
+
 %prep
 %setup -q 
 %apply_patches
-sed -e 's/\.dylib/.bundle/' -i configure.ac || die
 autoreconf -fi
 
 %build
@@ -84,8 +93,6 @@ autoreconf -fi
 	--with-gdk-pixbuf \
 	--disable-docs  \
 	--with-pic \
-	--with-gio \
-	--with-gtk \
 	--with-cairo \
 	--with-pangocairo \
 	--with-lensfun \
@@ -102,7 +109,8 @@ autoreconf -fi
 	--with-libv4l \
 	--with-libspiro \
 	--with-exiv2 \
-	--with-umfpack
+	--with-umfpack \
+	--enable-introspection
 
 %make
 
@@ -115,7 +123,7 @@ autoreconf -fi
 
 %files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
-%{_bindir}/gegl
+%{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
 
 %files -n %{libname}
@@ -126,4 +134,8 @@ autoreconf -fi
 %{_libdir}/*.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
+%{_libdir}/pkgconfig/%{name}-sc-%{api}.pc
 
+%files -n %{girname}
+%{_libdir}/girepository-1.0/Gegl-%{api}.typelib
+%{_datadir}/gir-1.0/Gegl-%{api}.gir
