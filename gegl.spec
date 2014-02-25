@@ -49,6 +49,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(vapigen)
 
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
@@ -110,6 +111,7 @@ autoreconf -fi
 	--with-libspiro \
 	--with-exiv2 \
 	--with-umfpack \
+	--with-vala \
 	--enable-introspection
 
 %make
@@ -125,6 +127,8 @@ autoreconf -fi
 %doc README AUTHORS NEWS
 %{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
+%{_datadir}/vala/vapi/gegl-%{api}.deps
+%{_datadir}/vala/vapi/gegl-%{api}.vapi
 
 %files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
