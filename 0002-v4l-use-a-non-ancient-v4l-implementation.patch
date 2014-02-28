@@ -1,0 +1,120 @@
+From e827180c2cc3e83d2073b2494de89a81039b762d Mon Sep 17 00:00:00 2001
+From: nick black <nick.black@sprezzatech.com>
+Date: Thu, 13 Dec 2012 23:51:18 -0500
+Subject: [PATCH 2/4] [v4l] use a non-ancient v4l implementation
+
+---
+ operations/external/v4lutils/v4lutils.c | 18 ++++++++----------
+ operations/external/v4lutils/v4lutils.h | 12 +++++++-----
+ 2 files changed, 15 insertions(+), 15 deletions(-)
+
+diff --git a/operations/external/v4lutils/v4lutils.c b/operations/external/v4lutils/v4lutils.c
+index d0a0878..7d16d21 100644
+--- a/operations/external/v4lutils/v4lutils.c
++++ b/operations/external/v4lutils/v4lutils.c
+@@ -1,6 +1,7 @@
+ /*
+  * v4lutils - utility library for Video4Linux
+  * Copyright (C) 2001-2002 FUKUCHI Kentaro
++ * Copyright (C) 2012 Nick Black <nick.black@sprezzatech.com>
+  *
+  * v4lutils.c: utility functions
+  *
+@@ -29,7 +30,6 @@
+ #include <sys/mman.h>
+ #include <unistd.h>
+ #include <fcntl.h>
+-#include <linux/videodev.h>
+ #include <pthread.h>
+ #include <errno.h>
+ #include "v4lutils.h"
+@@ -145,8 +145,8 @@ int v4lsetdefaultnorm(v4ldevice *vd, int norm)
+  */
+ int v4lgetsubcapture(v4ldevice *vd)
+ {
+-	if(ioctl(vd->fd, VIDIOCGCAPTURE, &(vd->capture)) < 0) {
+-		v4lperror("v4lgetsubcapture:VIDIOCGCAPTURE");
++	if(ioctl(vd->fd, VIDIOC_G_CROP, &(vd->capture)) < 0) {
++		v4lperror("v4lgetsubcapture:VIDIOC_G_CROP");
+ 		return -1;
+ 	}
+ 	return 0;
+@@ -162,16 +162,14 @@ int v4lgetsubcapture(v4ldevice *vd)
+  * decimation: decimation to apply
+  * flags: flag setting for grabbing odd/even frames
+  */
+-int v4lsetsubcapture(v4ldevice *vd, int x, int y, int width, int height, int decimation, int flags)
++int v4lsetsubcapture(v4ldevice *vd, int x, int y, int width, int height)
+ {
+-	vd->capture.x = x;
+-	vd->capture.y = y;
++	vd->capture.width = x;
++	vd->capture.height = y;
+ 	vd->capture.width = width;
+ 	vd->capture.height = height;
+-	vd->capture.decimation = decimation;
+-	vd->capture.flags = flags;
+-	if(ioctl(vd->fd, VIDIOCGCAPTURE, &(vd->capture)) < 0) {
+-		v4lperror("v4lsetsubcapture:VIDIOCSCAPTURE");
++	if(ioctl(vd->fd, VIDIOC_S_CROP, &(vd->capture)) < 0) {
++		v4lperror("v4lsetsubcapture:VIDIOC_S_CROP");
+ 		return -1;
+ 	}
+ 	return 0;
+diff --git a/operations/external/v4lutils/v4lutils.h b/operations/external/v4lutils/v4lutils.h
+index 059fd92..eee9bc1 100644
+--- a/operations/external/v4lutils/v4lutils.h
++++ b/operations/external/v4lutils/v4lutils.h
+@@ -1,6 +1,7 @@
+ /*
+  * v4lutils - utility library for Video4Linux
+  * Copyright (C) 2001-2002 FUKUCHI Kentaro
++ * Copyright (C) 2012 Nick Black <nick.black@sprezzatech.com>
+  *
+  * v4lutils.h: header file
+  *
+@@ -25,7 +26,8 @@
+ #define __V4LUTILS_H__
+ 
+ #include <sys/types.h>
+-#include <linux/videodev.h>
++#include <linux/videodev2.h>
++#include <libv4l1-videodev.h>
+ #include <pthread.h>
+ 
+ /*
+@@ -45,11 +47,11 @@ struct _v4ldevice
+ 	struct video_picture picture;
+ 	struct video_clip clip;
+ 	struct video_window window;
+-	struct video_capture capture;
++	struct v4l2_rect capture;
+ 	struct video_buffer buffer;
+ 	struct video_mmap mmap;
+ 	struct video_mbuf mbuf;
+-	struct video_unit unit;
++	// struct video_unit unit;
+ 	unsigned char *map;
+ 	pthread_mutex_t mutex;
+ 	int frame;
+@@ -63,8 +65,6 @@ extern int v4lopen(char *, v4ldevice *);
+ extern int v4lclose(v4ldevice *);
+ extern int v4lgetcapability(v4ldevice *);
+ extern int v4lsetdefaultnorm(v4ldevice *, int);
+-extern int v4lgetsubcapture(v4ldevice *);
+-extern int v4lsetsubcapture(v4ldevice *, int, int, int, int, int, int);
+ extern int v4lgetframebuffer(v4ldevice *);
+ extern int v4lsetframebuffer(v4ldevice *, void *, int, int, int, int);
+ extern int v4loverlaystart(v4ldevice *);
+@@ -74,6 +74,8 @@ extern int v4lmaxchannel(v4ldevice *);
+ extern int v4lsetfreq(v4ldevice *,int);
+ extern int v4lsetchannelnorm(v4ldevice *vd, int, int);
+ extern int v4lgetpicture(v4ldevice *);
++extern int v4lgetsubcapture(v4ldevice *);
++extern int v4lsetsubcapture(v4ldevice *, int, int, int, int);
+ extern int v4lsetpicture(v4ldevice *, int, int, int, int, int);
+ extern int v4lsetpalette(v4ldevice *, int);
+ extern int v4lgetmbuf(v4ldevice *);
+-- 
+1.8.5.3
+
