@@ -9,7 +9,7 @@ Summary:	GEGL (Generic Graphics Library) - graph based image processing framewor
 Name:		gegl
 Version:	0.3.0
 %define	gitdate	20140219
-Release:	%{?gitdate:0.%{gitdate}.}1
+Release:	%{?gitdate:0.%{gitdate}.}2
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -31,7 +31,7 @@ BuildRequires:	perl-devel
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	suitesparse-common-devel
-BuildRequires:	umfpack-devel
+BuildRequires:	umfpack-devel >= 1:5.6.2-3
 BuildRequires:	pkgconfig(babl) >= 0.1.11
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
