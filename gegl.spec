@@ -30,7 +30,7 @@ BuildRequires:	pango-modules
 BuildRequires:	perl-devel
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
-BuildRequires:	suitesparse-common-devel
+BuildRequires:	suitesparseconfig-devel
 BuildRequires:	umfpack-devel >= 1:5.6.2-3
 BuildRequires:	pkgconfig(babl) >= 0.1.11
 BuildRequires:	pkgconfig(cairo)
