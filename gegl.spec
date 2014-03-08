@@ -77,8 +77,9 @@ This package contains the libgegl-sc shared library for %{name}.
 %package -n	%{devname}
 Summary:	Header files for %{name}
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
+Requires:	%{libsc} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n	%{devname}
 This package contains the development files for %{name}.
