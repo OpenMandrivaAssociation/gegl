@@ -1,6 +1,7 @@
 %define	api	0.3
 %define	major	0
 %define	libname	%mklibname %{name} %{api} %{major}
+%define	libsc	%mklibname %{name}-sc %{api}
 %define	devname	%mklibname -d %{name} %{api}
 
 %define	girname	%mklibname %{name}-gir %{api}
@@ -60,11 +61,18 @@ compositing and processing core. This core is being designed to
 have minimal dependencies. and a simple well defined API. 
 
 %package -n     %{libname}
-Summary:	A library for %{name}
+Summary:	libgegl library for %{name}
 Group:		System/Libraries
 
 %description -n	%{libname}
-This package contains a shared library for %{name}.
+This package contains the libgegl shared library for %{name}.
+
+%package -n     %{libsc}
+Summary:	libgegl-sc library for %{name}
+Group:		System/Libraries
+
+%description -n	%{libsc}
+This package contains the libgegl-sc shared library for %{name}.
 
 %package -n	%{devname}
 Summary:	Header files for %{name}
@@ -133,9 +141,12 @@ autoreconf -fi
 %files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
 
+%files -n %{libsc}
+%{_libdir}/libgegl-sc-%{api}.so
+
 %files -n %{devname}
 %doc ChangeLog
-%{_libdir}/*.so
+%{_libdir}/libgegl-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sc-%{api}.pc
