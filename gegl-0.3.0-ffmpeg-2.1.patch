@@ -1,5 +1,5 @@
---- gegl-0.2.0/operations/workshop/external/ff-save.c.0000~	2012-03-29 22:05:50.000000000 +0200
-+++ gegl-0.2.0/operations/workshop/external/ff-save.c	2014-02-20 15:12:06.180085510 +0100
+--- gegl-0.3.0/operations/workshop/external/ff-save.c.0000~	2014-02-21 03:12:40.000000000 +0100
++++ gegl-0.3.0/operations/workshop/external/ff-save.c	2014-03-08 22:54:46.112505998 +0100
 @@ -568,7 +568,7 @@ open_video (Priv * p, AVFormatContext *
      }
  
@@ -9,6 +9,15 @@
      {
        fprintf (stderr, "could not open codec\n");
        exit (1);
+@@ -668,7 +668,7 @@ write_video_frame (GeglChantO *op,
+       else
+         {
+           sws_scale(img_convert_ctx,
+-                    p->tmp_picture->data,
++                    (const uint8_t* const*)p->tmp_picture->data,
+                     p->tmp_picture->linesize,
+                     0,
+                     c->height,
 @@ -769,26 +769,20 @@ tfile (GeglChantO *self)
       /*XXX: FOO p->audio_st = add_audio_stream (op, p->oc, p->fmt->audio_codec);*/
      }
@@ -44,7 +53,18 @@
            }
  
 -        url_fclose (&p->oc->pb);
-+        avio_close (&p->oc->pb);
++        avio_close (p->oc->pb);
          free (p->oc);
        }
        g_free (o->chant_data);
+--- gegl-0.3.0/configure.ac.0006~	2014-03-08 17:00:45.392278206 +0100
++++ gegl-0.3.0/configure.ac	2014-03-08 17:00:45.412278206 +0100
+@@ -904,7 +904,7 @@ AC_SUBST(LUA_LIBS)
+ AC_ARG_WITH(libavformat,  [  --without-libavformat   build without libavformat support])
+ 
+ if test "x$with_libavformat" != xno; then
+-  PKG_CHECK_MODULES(AVFORMAT, libavformat >= 53.0.0 libavcodec >= 53.0.0,
++  PKG_CHECK_MODULES(AVFORMAT, libavformat >= 53.0.0 libavcodec >= 53.0.0 libavutil >= 0.28 libswscale >= 0.28,
+     have_libavformat="yes",
+     have_libavformat="no  (libavformat not found)")
+   # verify the presence of the avformat.h header
