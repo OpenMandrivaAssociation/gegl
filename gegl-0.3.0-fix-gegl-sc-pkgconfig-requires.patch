@@ -1,0 +1,10 @@
+--- gegl-0.3.0/seamless-clone/gegl-sc.pc.in~	2014-02-21 03:12:40.000000000 +0100
++++ gegl-0.3.0/seamless-clone/gegl-sc.pc.in	2014-03-09 07:25:32.222834656 +0100
+@@ -6,6 +6,6 @@ includedir=@includedir@/sc
+ Name: GEGL Seamless Cloning
+ Description: Seamless Cloning Library Based on GEGL
+ Version: @GEGL_REAL_VERSION@
+-Requires: @GLIB_PACKAGES@ babl poly2tri-c @PACKAGE_NAME@
++Requires: @GLIB_PACKAGES@ babl poly2tri-c @PACKAGE_NAME@-@GEGL_API_VERSION@
+ Libs: -L${libdir} -l@PACKAGE_NAME@-sc-@GEGL_API_VERSION@
+ Cflags: -I${includedir}/@PACKAGE_NAME@-@GEGL_API_VERSION@/sc

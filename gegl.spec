@@ -22,6 +22,7 @@ Patch2:		0002-v4l-use-a-non-ancient-v4l-implementation.patch
 Patch3:		0003-check-for-kernel-videodev-not-libv4l.patch
 Patch4:		0004-add-autoconf-check-for-libv4l2.patch
 Patch5:		gegl-0.3.0-matting-leving-missing-linkage.patch
+Patch6:		gegl-0.3.0-fix-gegl-sc-pkgconfig-requires.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
