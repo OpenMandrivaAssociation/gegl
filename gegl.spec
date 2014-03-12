@@ -33,7 +33,6 @@ BuildRequires:	perl-devel
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	suitesparseconfig-devel
-BuildRequires:	umfpack-devel >= 1:5.6.2-3
 BuildRequires:	pkgconfig(babl) >= 0.1.11
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
@@ -120,7 +119,6 @@ autoreconf -fi
 	--with-libv4l \
 	--with-libspiro \
 	--with-exiv2 \
-	--with-umfpack \
 	--with-vala \
 	--enable-introspection
 
