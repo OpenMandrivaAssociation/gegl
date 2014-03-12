@@ -1,0 +1,50 @@
+From 498dec4db105b3119595f06bd4e23ef20d0de825 Mon Sep 17 00:00:00 2001
+From: nick black <nick.black@sprezzatech.com>
+Date: Fri, 14 Dec 2012 00:30:44 -0500
+Subject: [PATCH 4/4] add autoconf check for libv4l2
+
+---
+ configure.ac                            | 13 +++++++++++--
+ operations/external/v4lutils/v4lutils.h |  1 -
+ 3 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 33f30c5..1f65222 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -915,9 +915,18 @@ AM_CONDITIONAL(HAVE_AVFORMAT, test "x$have_libavformat" = "xyes")
+  
+ AC_ARG_WITH(libv4l, [  --without-libv4l        build without V4L support])
+ 
+-have_v4l="no"
+ if test "x$with_libv4l" != "xno"; then
+-  AC_CHECK_HEADER(linux/videodev2.h, have_v4l="yes")
++  AC_CHECK_HEADER(linux/videodev2.h,
++    [have_v4l="yes"],
++    [have_v4l="no  (kernel header not found)"])
++else
++  have_v4l="no  (disabled with --without-libv4l)"
++fi
++
++if test "x$have_v4l" = "xyes"; then
++  PKG_CHECK_MODULES(V4L, libv4l2,
++    [have_v4l="yes"],
++    [have_v4l="no  (v4l library not found)"])
+ fi
+ 
+ AM_CONDITIONAL(HAVE_V4L, test "$have_v4l" = "yes")
+diff --git a/operations/external/v4lutils/v4lutils.h b/operations/external/v4lutils/v4lutils.h
+index eee9bc1..be432db 100644
+--- a/operations/external/v4lutils/v4lutils.h
++++ b/operations/external/v4lutils/v4lutils.h
+@@ -51,7 +51,6 @@ struct _v4ldevice
+ 	struct video_buffer buffer;
+ 	struct video_mmap mmap;
+ 	struct video_mbuf mbuf;
+-	// struct video_unit unit;
+ 	unsigned char *map;
+ 	pthread_mutex_t mutex;
+ 	int frame;
+-- 
+1.8.5.3
+
