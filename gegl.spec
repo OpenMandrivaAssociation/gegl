@@ -30,8 +30,10 @@ BuildRequires:	graphviz
 BuildRequires:	imagemagick
 BuildRequires:	pango-modules
 BuildRequires:	perl-devel
+BuildRequires:	python-gobject-introspection
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
+BuildRequires:	spiro-devel
 BuildRequires:	suitesparseconfig-devel
 BuildRequires:	umfpack-devel >= 1:5.6.2-3
 BuildRequires:	pkgconfig(babl) >= 0.1.11
