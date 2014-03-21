@@ -141,8 +141,8 @@ autoreconf -fi
 %doc README AUTHORS NEWS
 %{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
-#% {_datadir}/vala/vapi/gegl-%{api}.deps
-#% {_datadir}/vala/vapi/gegl-%{api}.vapi
+%{_datadir}/vala/vapi/gegl-%{api}.deps
+%{_datadir}/vala/vapi/gegl-%{api}.vapi
 
 %files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
