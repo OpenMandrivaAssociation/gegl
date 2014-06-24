@@ -1,8 +1,8 @@
-%define	api	0.3
-%define	major	0
-%define	libname	%mklibname %{name} %{api} %{major}
-%define	libsc	%mklibname %{name}-sc %{api}
-%define	devname	%mklibname -d %{name} %{api}
+%define api 0.3
+%define major 0
+%define libname %mklibname %{name} %{api} %{major}
+%define libsc %mklibname %{name}-sc %{api}
+%define devname %mklibname -d %{name} %{api}
 
 %define	girname	%mklibname %{name}-gir %{api}
 
@@ -10,7 +10,7 @@ Summary:	GEGL (Generic Graphics Library) - graph based image processing framewor
 Name:		gegl
 Version:	0.3.0
 %define	gitdate	20140703
-Release:	%{?gitdate:0.%{gitdate}.}3
+Release:	%{?gitdate:0.%{gitdate}.}4
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -102,7 +102,7 @@ GObject Introspection interface description for %{name}.
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	--enable-workshop \
 	--with-pango \
 	--with-gdk-pixbuf \
