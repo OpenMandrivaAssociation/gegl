@@ -1,0 +1,20 @@
+--- gegl-0.3.0/operations/workshop/external/ff-save.c.orig	2014-10-25 18:47:51.161865402 +0100
++++ gegl-0.3.0/operations/workshop/external/ff-save.c	2014-10-25 18:47:58.314864875 +0100
+@@ -358,7 +358,7 @@
+   AVStream *st;
+ 
+   p = NULL;
+-  st = av_new_stream (oc, 1);
++  st = avformat_new_stream (oc, 1);
+   if (!st)
+     {
+       fprintf (stderr, "Could not alloc stream\n");
+@@ -487,7 +487,7 @@
+   AVCodecContext *c;
+   AVStream *st;
+ 
+-  st = av_new_stream (oc, 0);
++  st = avformat_new_stream (oc, 0);
+   if (!st)
+     {
+       fprintf (stderr, "Could not alloc stream %p %p %i\n", op, oc, codec_id);

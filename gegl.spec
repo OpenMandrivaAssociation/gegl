@@ -10,7 +10,7 @@ Summary:	GEGL (Generic Graphics Library) - graph based image processing framewor
 Name:		gegl
 Version:	0.3.0
 %define	gitdate	20140703
-Release:	%{?gitdate:0.%{gitdate}.}6
+Release:	%{?gitdate:0.%{gitdate}.}7
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -23,6 +23,7 @@ Patch3:		0003-check-for-kernel-videodev-not-libv4l.patch
 Patch4:		0004-add-autoconf-check-for-libv4l2.patch
 Patch5:		gegl-0.3.0-matting-leving-missing-linkage.patch
 Patch6:		gegl-0.3.0-fix-gegl-sc-pkgconfig-requires.patch
+Patch7:		gegl-0.3.0-ffmpeg-2.4.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
