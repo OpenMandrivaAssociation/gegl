@@ -6,7 +6,7 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
-Release:	13
+Release:	14
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -21,7 +21,7 @@ BuildRequires:	imagemagick
 BuildRequires:	pango-modules
 BuildRequires:	ruby
 #gw warning: this needs the deprecated libavcodec scaler (img_convert,...)
-BuildRequires:	ffmpeg-devel
+BuildRequires:	ffmpeg-devel >= 2.5.4
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.10
 BuildRequires:	pkgconfig(glib-2.0)
