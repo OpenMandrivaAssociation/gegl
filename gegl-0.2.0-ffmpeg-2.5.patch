@@ -1,0 +1,36 @@
+diff -up gegl-0.2.0/operations/workshop/external/ff-save.c.ffmpeg-2.5 gegl-0.2.0/operations/workshop/external/ff-save.c
+--- gegl-0.2.0/operations/workshop/external/ff-save.c.ffmpeg-2.5	2014-12-12 23:56:58.976289421 +0100
++++ gegl-0.2.0/operations/workshop/external/ff-save.c	2014-12-13 01:16:48.820652627 +0100
+@@ -358,12 +358,13 @@ add_audio_stream (GeglChantOperation *op
+   AVStream *st;
+ 
+   p = NULL;
+-  st = av_new_stream (oc, 1);
++  st = avformat_new_stream (oc, NULL);
+   if (!st)
+     {
+       fprintf (stderr, "Could not alloc stream\n");
+       exit (1);
+     }
++  st->id = 1;
+ 
+   c = st->codec;
+   c->codec_id = codec_id;
+@@ -487,7 +488,7 @@ add_video_stream (GeglChantO *op, AVForm
+   AVCodecContext *c;
+   AVStream *st;
+ 
+-  st = av_new_stream (oc, 0);
++  st = avformat_new_stream (oc, NULL);
+   if (!st)
+     {
+       fprintf (stderr, "Could not alloc stream %p %p %i\n", op, oc, codec_id);
+@@ -858,7 +859,7 @@ finalize (GObject *object)
+             av_freep (&p->oc->streams[i]);
+           }
+ 
+-        avio_close (&p->oc->pb);
++        avio_close (p->oc->pb);
+         free (p->oc);
+       }
+       g_free (o->chant_data);

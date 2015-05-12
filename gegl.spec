@@ -6,14 +6,17 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.2.0
-Release:	14
+Release:	15
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-Patch0:		gegl-0.2.0-ffmpeg-0.11.patch
-Patch1:		gegl-0.2.0-lua-5.2.patch
-Patch2:		gegl-0.2.0-ffmpeg2.1.patch
+Patch0:         gegl-0.2.0-CVE-2012-4433-1.patch
+Patch1:         gegl-0.2.0-CVE-2012-4433-2.patch
+Patch2:		gegl-0.2.0-ffmpeg-0.11.patch
+Patch3:		gegl-0.2.0-lua-5.2.patch
+Patch4:         gegl-0.2.0-ffmpeg-2.5.patch
+Patch5:		0002-Port_gegl_forward_to_libav54.patch
 BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz

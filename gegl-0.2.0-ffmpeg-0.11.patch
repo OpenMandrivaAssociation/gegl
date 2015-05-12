@@ -1,26 +1,25 @@
---- gegl-0.2.0/operations/external/ff-load.c.ffmpeg11~	2012-04-01 13:17:57.000000000 +0200
-+++ gegl-0.2.0/operations/external/ff-load.c	2012-06-28 19:35:36.318213579 +0200
-@@ -271,7 +271,7 @@ prepare (GeglOperation *operation)
-       gint err;
+--- gegl-0.2.0/operations/workshop/external/ff-save.c.ffmpeg	2012-03-30 04:05:50.000000000 +0800
++++ gegl-0.2.0/operations/workshop/external/ff-save.c	2013-08-03 19:52:53.718359634 +0800
+@@ -568,7 +568,7 @@
+     }
  
-       ff_cleanup (o);
--      err = av_open_input_file (&p->ic, o->path, NULL, 0, NULL);
-+      err = avformat_open_input (&p->ic, o->path, NULL, NULL);
-       if (err < 0)
-         {
-           print_error (o->path, err);
---- gegl-0.2.0/operations/workshop/external/ff-save.c.ffmpeg11~	2012-03-29 22:05:50.000000000 +0200
-+++ gegl-0.2.0/operations/workshop/external/ff-save.c	2012-06-28 19:51:09.954541517 +0200
-@@ -769,26 +769,20 @@ tfile (GeglChantO *self)
+   /* open the codec */
+-  if (avcodec_open (c, codec) < 0)
++  if (avcodec_open2 (c, codec, NULL) < 0)
+     {
+       fprintf (stderr, "could not open codec\n");
+       exit (1);
+@@ -769,26 +769,26 @@
       /*XXX: FOO p->audio_st = add_audio_stream (op, p->oc, p->fmt->audio_codec);*/
      }
  
 -  if (av_set_parameters (p->oc, NULL) < 0)
--    {
--      fprintf (stderr, "Invalid output format propeters\n%s", "");
--      return -1;
--    }
--
++  if (avformat_write_header (p->oc, NULL) < 0)
+     {
+       fprintf (stderr, "Invalid output format propeters\n%s", "");
+       return -1;
+     }
+ 
 -  dump_format (p->oc, 0, self->path, 1);
 +  av_dump_format (p->oc, 0, self->path, 1);
  
@@ -41,7 +40,7 @@
  
    return 0;
  }
-@@ -858,7 +852,7 @@ finalize (GObject *object)
+@@ -858,7 +858,7 @@
              av_freep (&p->oc->streams[i]);
            }
  
