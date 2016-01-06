@@ -1,3 +1,6 @@
+%define _disable_rebuild_configure 1
+%define _disable_ld_no_undefined 1
+
 %define api 0.3
 %define major 0
 %define libname %mklibname %{name} %{api} %{major}
@@ -8,22 +11,16 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.3.0
-%define	gitdate	20140703
-Release:	%{?gitdate:0.%{gitdate}.}7
+Version:	0.3.4
+#define	gitdate	
+Release:	%{?gitdate:0.%{gitdate}.}1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
-Source0:	ftp://ftp.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
-Patch0:		gegl-0.3.0-ffmpeg-2.1.patch
-Patch1:		0001-v4l-use-pkg-config-to-look-for-v4l2.patch
-Patch2:		0002-v4l-use-a-non-ancient-v4l-implementation.patch
-Patch3:		0003-check-for-kernel-videodev-not-libv4l.patch
-Patch4:		0004-add-autoconf-check-for-libv4l2.patch
-Patch5:		gegl-0.3.0-matting-leving-missing-linkage.patch
-Patch6:		gegl-0.3.0-fix-gegl-sc-pkgconfig-requires.patch
-Patch7:		gegl-0.3.0-ffmpeg-2.4.patch
+Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
+#Patch1:		gegl-0.3.0-matting-leving-missing-linkage.patch
+Patch2:		gegl-0.3.4-fmt_security.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -35,8 +32,7 @@ BuildRequires:	python-gobject-introspection
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	spiro-devel
-BuildRequires:	suitesparseconfig-devel
-BuildRequires:	umfpack-devel >= 1:5.6.2-3
+BuildRequires:	suitesparse-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.11
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
@@ -100,11 +96,10 @@ GObject Introspection interface description for %{name}.
 %prep
 %setup -q 
 %apply_patches
-autoreconf -fi
 
 %build
 %configure \
-	--enable-workshop \
+	--disable-workshop \
 	--with-pango \
 	--with-gdk-pixbuf \
 	--disable-docs  \
@@ -122,7 +117,8 @@ autoreconf -fi
 	--with-graphviz \
 	--with-lua \
 	--with-libavformat \
-	--with-libv4l \
+	--with-libv4l2 \
+	--without-libv4l \
 	--with-libspiro \
 	--with-exiv2 \
 	--with-umfpack \
@@ -143,6 +139,7 @@ autoreconf -fi
 %doc README AUTHORS NEWS
 %{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
+%{_libdir}/gegl-%{api}/*.json
 %{_datadir}/vala/vapi/gegl-%{api}.deps
 %{_datadir}/vala/vapi/gegl-%{api}.vapi
 
@@ -155,6 +152,7 @@ autoreconf -fi
 %files -n %{devname}
 %doc ChangeLog
 %{_libdir}/libgegl-%{api}.so
+%{_libdir}/libgegl-npd-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sc-%{api}.pc
