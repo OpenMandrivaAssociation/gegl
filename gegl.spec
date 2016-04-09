@@ -5,6 +5,7 @@
 %define major 0
 %define libname %mklibname %{name} %{api} %{major}
 %define libsc %mklibname %{name}-sc %{api}
+%define libnpd %mklibname %{name}-npd %{api}
 %define devname %mklibname -d %{name} %{api}
 
 %define	girname	%mklibname %{name}-gir %{api}
@@ -13,7 +14,7 @@ Summary:	GEGL (Generic Graphics Library) - graph based image processing framewor
 Name:		gegl
 Version:	0.3.6
 #define	gitdate	
-Release:	%{?gitdate:0.%{gitdate}.}1
+Release:	%{?gitdate:0.%{gitdate}.}2
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -77,11 +78,19 @@ Group:		System/Libraries
 %description -n	%{libsc}
 This package contains the libgegl-sc shared library for %{name}.
 
+%package -n     %{libnpd}
+Summary:        libgegl-npd library for %{name}
+Group:          System/Libraries
+
+%description -n %{libnpd}
+This package contains the libgegl-npd shared library for %{name}.
+
 %package -n	%{devname}
 Summary:	Header files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
 Requires:	%{libsc} = %{EVRD}
+Requires:	%{libnpd} = %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n	%{devname}
@@ -150,10 +159,12 @@ GObject Introspection interface description for %{name}.
 %files -n %{libsc}
 %{_libdir}/libgegl-sc-%{api}.so
 
+%files -n %{libnpd}
+%{_libdir}/libgegl-npd-%{api}.so
+
 %files -n %{devname}
 %doc ChangeLog
 %{_libdir}/libgegl-%{api}.so
-%{_libdir}/libgegl-npd-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sc-%{api}.pc
