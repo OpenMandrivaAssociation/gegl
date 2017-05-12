@@ -1,5 +1,2 @@
-removed_sources:
-  gegl-0.3.0.tar.xz: bd6ce77b2cd77c78f3df6cf3268c3475f82da8fe
-  gegl-0.3.4.tar.bz2: 20528559801d5a44b821c7e71c25c592a0986b00
 sources:
-  gegl-0.3.6.tar.bz2: 0abb6b0eb848f98ae9058b1bb6523fdf9176beb9
+  gegl-0.3.14.tar.bz2: 7d70d3392123cdb810397ac0d67fc64efc6670be
