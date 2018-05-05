@@ -1,7 +1,7 @@
 %define _disable_rebuild_configure 1
 %define _disable_ld_no_undefined 1
 
-%define api 0.3
+%define api 0.4
 %define major 0
 %define libname %mklibname %{name} %{api} %{major}
 %define libsc %mklibname %{name}-sc %{api}
@@ -33,7 +33,7 @@ BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	spiro-devel
 BuildRequires:	suitesparse-devel
-BuildRequires:	pkgconfig(babl) >= 0.1.11
+BuildRequires:	pkgconfig(babl) >= 0.1.46
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
