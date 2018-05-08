@@ -107,6 +107,12 @@ GObject Introspection interface description for %{name}.
 %apply_patches
 
 %build
+%ifarch %ix86
+# still requires gcc
+export CXX=g++
+export CC=gcc
+%endif
+
 %configure \
 	--disable-workshop \
 	--with-pango \
