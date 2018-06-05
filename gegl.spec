@@ -20,7 +20,7 @@ License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-Patch0:		gegl-0.3.28-ffmpeg-3.5.patch
+#Patch0:		gegl-0.3.28-ffmpeg-3.5.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -107,6 +107,8 @@ GObject Introspection interface description for %{name}.
 %apply_patches
 
 %build
+export CC=gcc
+export CXX=g++
 %configure \
 	--disable-workshop \
 	--with-pango \
