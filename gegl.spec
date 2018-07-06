@@ -12,7 +12,7 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.0
+Version:	0.4.4
 #define	gitdate	
 Release:	%{?gitdate:1.%{gitdate}.}1
 Group:		System/Libraries
@@ -20,7 +20,7 @@ License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-Patch0:		gegl-0.3.28-ffmpeg-3.5.patch
+#Patch0:		gegl-0.3.28-ffmpeg-3.5.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -33,7 +33,7 @@ BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	spiro-devel
 BuildRequires:	suitesparse-devel
-BuildRequires:	pkgconfig(babl) >= 0.1.46
+BuildRequires:	pkgconfig(babl) >= 0.1.52
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
@@ -107,12 +107,8 @@ GObject Introspection interface description for %{name}.
 %apply_patches
 
 %build
-%ifarch %ix86
-# still requires gcc
 export CXX=g++
 export CC=gcc
-%endif
-
 %configure \
 	--disable-workshop \
 	--with-pango \

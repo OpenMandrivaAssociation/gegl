@@ -1,2 +1,4 @@
+removed_sources:
+  gegl-0.4.2.tar.bz2: 4276283edc7cda3975d3a5275af09f7dc0b8098c
 sources:
-  gegl-0.4.0.tar.bz2: 6a26d3449052a8bdd3f205051d4886767004de22
+  gegl-0.4.4.tar.bz2: b709b5051228014371ff07c065b156923baa817a
