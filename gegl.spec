@@ -13,14 +13,12 @@
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
 Version:	0.4.4
-#define	gitdate	
-Release:	%{?gitdate:1.%{gitdate}.}1
+Release:	2
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-#Patch0:		gegl-0.3.28-ffmpeg-3.5.patch
 
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -43,7 +41,7 @@ BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libavformat)
-BuildRequires:	pkgconfig(libopenraw-0.1)
+BuildRequires:	pkgconfig(libraw)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libv4l2)
@@ -118,12 +116,10 @@ export CC=gcc
 	--with-cairo \
 	--with-pangocairo \
 	--with-lensfun \
-	--with-libjpeg \
-	--with-libpng \
 	--with-librsvg \
 	--with-openexr \
 	--with-sdl \
-	--with-libopenraw \
+	--with-libraw \
 	--with-jasper \
 	--with-graphviz \
 	--with-lua \
