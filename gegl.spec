@@ -29,6 +29,7 @@ BuildRequires:	perl-devel
 BuildRequires:	python-gobject-introspection
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
+BuildRequires:	gomp-devel
 BuildRequires:	spiro-devel
 BuildRequires:	suitesparse-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.52
