@@ -12,8 +12,8 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.4
-Release:	2
+Version:	0.4.12
+Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
@@ -29,6 +29,7 @@ BuildRequires:	perl-devel
 BuildRequires:	python-gobject-introspection
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
+BuildRequires:	gomp-devel
 BuildRequires:	spiro-devel
 BuildRequires:	suitesparse-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.52
