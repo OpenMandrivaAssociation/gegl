@@ -25,6 +25,7 @@ BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz
 BuildRequires:	imagemagick
+BuildRequires:  librsvg2
 BuildRequires:	pango-modules
 BuildRequires:	perl-devel
 BuildRequires:	python-gobject-introspection
@@ -36,6 +37,7 @@ BuildRequires:	suitesparse-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.52
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
+BuildRequires:  pkgconfig(gexiv2)
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
