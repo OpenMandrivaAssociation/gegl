@@ -42,6 +42,7 @@ BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
+
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libavformat)
@@ -57,7 +58,7 @@ BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(vapigen)
-
+BuildRequires:  pkgconfig(jasper)
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
 framework.
