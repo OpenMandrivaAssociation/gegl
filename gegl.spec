@@ -12,14 +12,15 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.16
+Version:	0.4.18
 Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
-Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
+Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
 
+BuildRequires:	meson
 BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz
@@ -51,6 +52,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(poly2tri-c)
+BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(vapigen)
 
@@ -106,42 +108,15 @@ GObject Introspection interface description for %{name}.
 %apply_patches
 
 %build
-export CC=gcc
-export CXX=g++
-%configure \
-	--disable-workshop \
-	--with-pango \
-	--with-gdk-pixbuf \
-	--disable-docs  \
-	--with-pic \
-	--with-cairo \
-	--with-pangocairo \
-	--with-lensfun \
-	--with-librsvg \
-	--with-openexr \
-	--with-sdl \
-	--with-libraw \
-	--with-jasper \
-	--with-graphviz \
-	--with-lua \
-	--with-libavformat \
-	--with-libv4l2 \
-	--without-libv4l \
-	--with-libspiro \
-	--with-exiv2 \
-	--with-umfpack \
-	--with-vala \
-	--enable-introspection
-
-%make
+#export CC=gcc
+#export CXX=g++
+%meson -Dmrg=disabled
+%meson_build
 
 %install
-%makeinstall_std
-%find_lang %{name}-%{api}
+%meson_install
 
-%check
-# temp disable
-#make check
+%find_lang %{name}-%{api}
 
 %files -f %{name}-%{api}.lang
 %doc README AUTHORS NEWS
