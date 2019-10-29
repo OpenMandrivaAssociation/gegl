@@ -126,7 +126,7 @@ export LDFLAGS="%{optflags} -lm"
 %find_lang %{name}-%{api}
 
 %files -f %{name}-%{api}.lang
-%doc README AUTHORS NEWS
+%doc AUTHORS
 %{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
 %{_libdir}/gegl-%{api}/*.json
