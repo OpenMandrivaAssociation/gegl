@@ -143,7 +143,7 @@ export LDFLAGS="%{optflags} -lm"
 %{_libdir}/libgegl-npd-%{api}.so
 
 %files -n %{devname}
-%doc ChangeLog
+%doc
 %{_libdir}/libgegl-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
