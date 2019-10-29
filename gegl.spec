@@ -1,5 +1,6 @@
 %define _disable_rebuild_configure 1
 %define _disable_ld_no_undefined 1
+%define _disable_lto 1
 
 %define api 0.4
 %define major 0
@@ -12,33 +13,36 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.16
+Version:	0.4.18
 Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
-Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.bz2
-
+Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
+BuildRequires:	meson
 BuildRequires:	enscript
 BuildRequires:	intltool
 BuildRequires:	graphviz
 BuildRequires:	imagemagick
+BuildRequires:  librsvg2
 BuildRequires:	pango-modules
 BuildRequires:	perl-devel
 BuildRequires:	python-gobject-introspection
 BuildRequires:	ruby
 BuildRequires:	jpeg-devel
 BuildRequires:	gomp-devel
-BuildRequires:	spiro-devel
+BuildRequires:	pkgconfig(libspiro)
 BuildRequires:	suitesparse-devel
 BuildRequires:	pkgconfig(babl) >= 0.1.52
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
+BuildRequires:  pkgconfig(gexiv2)
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:  pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libavformat)
@@ -46,14 +50,18 @@ BuildRequires:	pkgconfig(libraw)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libv4l2)
+BuildRequires:  pkgconfig(libv4l1)
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(lua)
+BuildRequires:  pkgconfig(luajit)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(poly2tri-c)
+BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
+BuildRequires:  pkgconfig(sdl2)
 BuildRequires:	pkgconfig(vapigen)
-
+BuildRequires:  pkgconfig(jasper)
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
 framework.
@@ -103,53 +111,28 @@ GObject Introspection interface description for %{name}.
 
 %prep
 %setup -q 
-%apply_patches
+%autopatch -p0
 
 %build
-export CC=gcc
-export CXX=g++
-%configure \
-	--disable-workshop \
-	--with-pango \
-	--with-gdk-pixbuf \
-	--disable-docs  \
-	--with-pic \
-	--with-cairo \
-	--with-pangocairo \
-	--with-lensfun \
-	--with-librsvg \
-	--with-openexr \
-	--with-sdl \
-	--with-libraw \
-	--with-jasper \
-	--with-graphviz \
-	--with-lua \
-	--with-libavformat \
-	--with-libv4l2 \
-	--without-libv4l \
-	--with-libspiro \
-	--with-exiv2 \
-	--with-umfpack \
-	--with-vala \
-	--enable-introspection
-
-%make
+#export CC=gcc
+#export CXX=g++
+export LDFLAGS="%{optflags} -lm"
+%meson -Dmrg=disabled
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
+
 %find_lang %{name}-%{api}
 
-%check
-# temp disable
-#make check
-
 %files -f %{name}-%{api}.lang
-%doc README AUTHORS NEWS
+%doc AUTHORS
 %{_bindir}/*
 %{_libdir}/gegl-%{api}/*.so
 %{_libdir}/gegl-%{api}/*.json
 %{_datadir}/vala/vapi/gegl-%{api}.deps
 %{_datadir}/vala/vapi/gegl-%{api}.vapi
+%{_datadir}/gegl-0.4/lua/*
 
 %files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
@@ -161,7 +144,7 @@ export CXX=g++
 %{_libdir}/libgegl-npd-%{api}.so
 
 %files -n %{devname}
-%doc ChangeLog
+%doc
 %{_libdir}/libgegl-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
