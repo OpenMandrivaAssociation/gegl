@@ -116,7 +116,7 @@ GObject Introspection interface description for %{name}.
 %build
 #export CC=gcc
 #export CXX=g++
-export LDFLAGS="%{optflags} -lm
+export LDFLAGS="%{optflags} -lm"
 %meson -Dmrg=disabled
 %meson_build
 
