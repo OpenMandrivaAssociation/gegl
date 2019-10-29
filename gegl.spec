@@ -20,8 +20,6 @@ License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
-Patch0:   gegl-math-openmandriva.patch
-
 BuildRequires:	meson
 BuildRequires:	enscript
 BuildRequires:	intltool
@@ -118,6 +116,7 @@ GObject Introspection interface description for %{name}.
 %build
 #export CC=gcc
 #export CXX=g++
+export LDFLAGS="%{optflags} -lm
 %meson -Dmrg=disabled
 %meson_build
 
