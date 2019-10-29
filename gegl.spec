@@ -1,6 +1,7 @@
 %define _disable_rebuild_configure 1
 %define _disable_ld_no_undefined 1
-#define _disable_lto 1
+
+%global optflags %{optflags} -O3
 
 %define api 0.4
 %define major 0
