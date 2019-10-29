@@ -117,7 +117,7 @@ GObject Introspection interface description for %{name}.
 %build
 #export CC=gcc
 #export CXX=g++
-%meson
+%meson -Dmrg=disabled
 %meson_build -lm
 
 %install
