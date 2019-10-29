@@ -132,6 +132,7 @@ export LDFLAGS="%{optflags} -lm"
 %{_libdir}/gegl-%{api}/*.json
 %{_datadir}/vala/vapi/gegl-%{api}.deps
 %{_datadir}/vala/vapi/gegl-%{api}.vapi
+%{_datadir}/gegl-0.4/lua/*
 
 %files -n %{libname}
 %{_libdir}/libgegl-%{api}.so.%{major}*
