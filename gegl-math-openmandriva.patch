@@ -1,0 +1,13 @@
+Index: meson.build
+===================================================================
+--- meson.build
++++ meson.build	2019-10-29 18:45:57.948684017 +0100
+@@ -143,7 +143,7 @@
+ config.set('HAVE_FSYNC',       cc.has_function('fsync'))
+ config.set('HAVE_MALLOC_TRIM', cc.has_function('malloc_trim'))
+ 
+-math    = cc.find_library('m', required: false)
++math    = cc.find_library('m', required: true)
+ libdl   = cc.find_library('dl', required : false)
+ thread  = dependency('threads')
+ 
