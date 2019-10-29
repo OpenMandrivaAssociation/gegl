@@ -59,6 +59,7 @@ BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
+BuildRequires:  pkgconfig(sdl2)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  pkgconfig(jasper)
 %description
