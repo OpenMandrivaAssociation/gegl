@@ -14,15 +14,13 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.18
-Release:	2
+Version:	0.4.20
+Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
-Patch0:         0001-meson_fix-cpu-detection.patch
-Patch1:         0002-meson_add-host-cpu-message.patch
 BuildRequires:	meson
 BuildRequires:	enscript
 BuildRequires:	intltool
