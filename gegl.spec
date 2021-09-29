@@ -14,7 +14,7 @@
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.30
+Version:	0.4.32
 Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
@@ -56,7 +56,7 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:  pkgconfig(luajit)
 BuildRequires:  pkgconfig(maxflow)
-BuildRequires:	pkgconfig(OpenEXR)
+BuildRequires:	pkgconfig(OpenEXR) >= 3.1.0
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:  pkgconfig(poppler-glib)
