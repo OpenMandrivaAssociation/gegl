@@ -22,10 +22,6 @@ Url:		http://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
 
-# Support for compiling with new FFMPEG 5
-# https://gitlab.gnome.org/GNOME/gegl/-/issues/301
-Patch0:   https://gitlab.gnome.org/GNOME/gegl/-/merge_requests/114.patch
-
 BuildRequires:	meson
 BuildRequires:	enscript
 BuildRequires:	intltool
