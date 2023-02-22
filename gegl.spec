@@ -36,7 +36,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(libspiro)
 BuildRequires:	suitesparse-devel
-BuildRequires:	pkgconfig(babl) >= 0.1.52
+BuildRequires:	pkgconfig(babl-0.1) >= 0.1.52
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:  pkgconfig(gexiv2)
