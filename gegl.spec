@@ -147,7 +147,7 @@ export LDFLAGS="%{optflags} -lm"
 %{_libdir}/libgegl-npd-%{api}.so
 
 %files -n %{devname}
-%doc
+%doc %{_datadir}/doc/gegl-0.4/
 %{_libdir}/libgegl-%{api}.so
 %{_includedir}/gegl-%{api}/
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
