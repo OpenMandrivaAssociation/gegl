@@ -9,18 +9,17 @@
 %define libsc %mklibname %{name}-sc %{api}
 %define libnpd %mklibname %{name}-npd %{api}
 %define devname %mklibname -d %{name} %{api}
-
 %define	girname	%mklibname %{name}-gir %{api}
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.46
-Release:	2
+Version:	0.4.48
+Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
-Url:		http://www.gegl.org/
+Url:		https://www.gegl.org/
 # git clone git://git.gnome.org/gegl
-Source0:	http://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
+Source0:	https://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
 
 BuildRequires:	meson
 BuildRequires:	enscript
@@ -36,7 +35,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(libspiro)
 BuildRequires:	suitesparse-devel
-BuildRequires:	pkgconfig(babl-0.1) >= 0.1.52
+BuildRequires:	pkgconfig(babl-0.1) >= 0.1.108
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:  pkgconfig(gexiv2)
