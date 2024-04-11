@@ -1,0 +1,75 @@
+--- gegl-0.4.48/operations/external/ff-load.c.orig	2024-04-11 15:53:15.289468866 +0100
++++ gegl-0.4.48/operations/external/ff-load.c	2024-04-11 15:56:38.975408253 +0100
+@@ -250,7 +250,7 @@
+               while (samples_left)
+               {
+                  int sample_count = samples_left;
+-                 int channels = MIN(p->audio_stream->codecpar->channels, GEGL_MAX_AUDIO_CHANNELS);
++                 int channels = MIN(p->audio_stream->codecpar->ch_layout.nb_channels, GEGL_MAX_AUDIO_CHANNELS);
+                  GeglAudioFragment *af = gegl_audio_fragment_new (o->audio_sample_rate, channels,
+                             AV_CH_LAYOUT_STEREO, samples_left);
+   //);
+@@ -553,7 +553,7 @@
+           else
+             {
+               o->audio_sample_rate = p->audio_stream->codecpar->sample_rate;
+-              o->audio_channels = MIN(p->audio_stream->codecpar->channels, GEGL_MAX_AUDIO_CHANNELS);
++              o->audio_channels = MIN(p->audio_stream->codecpar->ch_layout.nb_channels, GEGL_MAX_AUDIO_CHANNELS);
+             }
+         }
+ 
+--- gegl-0.4.48/operations/external/ff-save.c.orig	2024-04-11 15:53:19.345328249 +0100
++++ gegl-0.4.48/operations/external/ff-save.c	2024-04-11 16:30:20.932135237 +0100
+@@ -315,8 +315,7 @@
+   }
+   cp->sample_rate = o->audio_sample_rate;
+ 
+-  cp->channel_layout = AV_CH_LAYOUT_STEREO;
+-  cp->channels = 2;
++  cp->ch_layout   = (AVChannelLayout)AV_CHANNEL_LAYOUT_STEREO;
+ 
+   return st;
+ }
+@@ -392,8 +391,7 @@
+ 
+   frame->format         = c->sample_fmt;
+ 
+-  frame->channel_layout = c->channel_layout;
+-  frame->channels = c->channels;
++  frame->ch_layout      = c->ch_layout;
+   frame->sample_rate    = c->sample_rate;
+   frame->nb_samples     = nb_samples;
+ 
+@@ -423,8 +421,8 @@
+         {
+           float left = 0, right = 0;
+           get_sample_data (p, i + p->audio_read_pos, &left, &right);
+-          ((float*)frame->data[0])[c->channels*i+0] = left;
+-          ((float*)frame->data[0])[c->channels*i+1] = right;
++          ((float*)frame->data[0])[c->ch_layout.nb_channels*i+0] = left;
++          ((float*)frame->data[0])[c->ch_layout.nb_channels*i+1] = right;
+         }
+         break;
+       case AV_SAMPLE_FMT_FLTP:
+@@ -441,8 +439,8 @@
+         {
+           float left = 0, right = 0;
+           get_sample_data (p, i + p->audio_read_pos, &left, &right);
+-          ((int16_t*)frame->data[0])[c->channels*i+0] = left * (1<<15);
+-          ((int16_t*)frame->data[0])[c->channels*i+1] = right * (1<<15);
++          ((int16_t*)frame->data[0])[c->ch_layout.nb_channels*i+0] = left * (1<<15);
++          ((int16_t*)frame->data[0])[c->ch_layout.nb_channels*i+1] = right * (1<<15);
+         }
+         break;
+       case AV_SAMPLE_FMT_S32:
+@@ -450,8 +448,8 @@
+         {
+           float left = 0, right = 0;
+           get_sample_data (p, i + p->audio_read_pos, &left, &right);
+-          ((int32_t*)frame->data[0])[c->channels*i+0] = left * (1<<31);
+-          ((int32_t*)frame->data[0])[c->channels*i+1] = right * (1<<31);
++          ((int32_t*)frame->data[0])[c->ch_layout.nb_channels*i+0] = left * (1<<31);
++          ((int32_t*)frame->data[0])[c->ch_layout.nb_channels*i+1] = right * (1<<31);
+         }
+         break;
+       case AV_SAMPLE_FMT_S32P:

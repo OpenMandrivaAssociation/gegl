@@ -20,6 +20,7 @@ License:	LGPLv3+
 Url:		https://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	https://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
+Patch1:		gegl-0.4.48_ffmpeg7.patch
 
 BuildRequires:	meson
 BuildRequires:	enscript
@@ -114,8 +115,7 @@ Group:		System/Libraries
 GObject Introspection interface description for %{name}.
 
 %prep
-%setup -q 
-%autopatch -p1
+%autosetup -p1
 
 %build
 # Needed or meson can't find math -lm
