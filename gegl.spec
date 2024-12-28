@@ -5,16 +5,21 @@
 
 %define api 0.4
 %define major 0
-%define libname %mklibname %{name} %{api} %{major}
-%define libsc %mklibname %{name}-sc %{api}
-%define libnpd %mklibname %{name}-npd %{api}
-%define devname %mklibname -d %{name} %{api}
-%define	girname	%mklibname %{name}-gir %{api}
+%define libname %mklibname %{name}
+%define oldlibname %mklibname %{name} 0.4 0
+%define libsc %mklibname %{name}-sc
+%define oldlibsc %mklibname %{name}-sc 0.4
+%define libnpd %mklibname %{name}-npd
+%define oldlibnpd %mklibname %{name}-npd 0.4
+%define devname %mklibname -d %{name}
+%define olddevname %mklibname -d %{name} 0.4
+%define	girname	%mklibname %{name}-gir
+%define	oldgirname	%mklibname %{name}-gir 0.4
 
 Summary:	GEGL (Generic Graphics Library) - graph based image processing framework
 Name:		gegl
-Version:	0.4.50
-Release:	2
+Version:	0.4.52
+Release:	1
 Group:		System/Libraries
 License:	LGPLv3+
 Url:		https://www.gegl.org/
@@ -44,13 +49,16 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(gi-docgen)
 BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:  pkgconfig(graphviz)
 BuildRequires:  pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(json-glib-1.0)
+BuildRequires:  pkgconfig(lcms)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libavformat)
 BuildRequires:	pkgconfig(libraw)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:  pkgconfig(libspiro)
 BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libv4l1)
 BuildRequires:	pkgconfig(libwebp)
@@ -58,6 +66,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:  pkgconfig(luajit)
 BuildRequires:  pkgconfig(maxflow)
 BuildRequires:	pkgconfig(OpenEXR) >= 3.1.0
+BuildRequires:  pkgconfig(pango)
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:  pkgconfig(poppler-glib)
@@ -66,6 +75,7 @@ BuildRequires:	pkgconfig(sdl)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  pkgconfig(jasper)
+BuildRequires:  python-gi
 %description
 GEGL (Generic Graphics Library) is a graph based image processing 
 framework.
@@ -77,6 +87,7 @@ have minimal dependencies. and a simple well defined API.
 %package -n     %{libname}
 Summary:	libgegl library for %{name}
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %description -n	%{libname}
 This package contains the libgegl shared library for %{name}.
@@ -84,6 +95,7 @@ This package contains the libgegl shared library for %{name}.
 %package -n     %{libsc}
 Summary:	libgegl-sc library for %{name}
 Group:		System/Libraries
+%rename %{oldlibsc}
 
 %description -n	%{libsc}
 This package contains the libgegl-sc shared library for %{name}.
@@ -91,6 +103,7 @@ This package contains the libgegl-sc shared library for %{name}.
 %package -n     %{libnpd}
 Summary:        libgegl-npd library for %{name}
 Group:          System/Libraries
+%rename %{oldlibnpd}
 
 %description -n %{libnpd}
 This package contains the libgegl-npd shared library for %{name}.
@@ -102,6 +115,7 @@ Requires:	%{libname} = %{EVRD}
 Requires:	%{libsc} = %{EVRD}
 Requires:	%{libnpd} = %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
+%rename %{olddevname}
 
 %description -n	%{devname}
 This package contains the development files for %{name}.
@@ -109,6 +123,7 @@ This package contains the development files for %{name}.
 %package -n	%{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
+%rename %{oldgirname}
 
 %description -n	%{girname}
 GObject Introspection interface description for %{name}.
