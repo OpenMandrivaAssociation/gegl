@@ -25,7 +25,7 @@ License:	LGPLv3+
 Url:		https://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	https://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
-Patch0:   https://github.com/lazka/MINGW-packages/blob/61eb9aec364ffbb32bac60f4c970d0eabfad628f/mingw-w64-gegl/0002-ffmpeg8.patch
+#Patch0:   https://github.com/lazka/MINGW-packages/blob/61eb9aec364ffbb32bac60f4c970d0eabfad628f/mingw-w64-gegl/0002-ffmpeg8.patch
 
 BuildRequires:	meson
 BuildRequires:	enscript
