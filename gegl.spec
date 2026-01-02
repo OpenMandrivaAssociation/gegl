@@ -25,6 +25,7 @@ License:	LGPLv3+
 Url:		https://www.gegl.org/
 # git clone git://git.gnome.org/gegl
 Source0:	https://download.gimp.org/pub/gegl/%{api}/%{name}-%{version}.tar.xz
+Patch0:    https://gitlab.gnome.org/GNOME/gegl/-/commit/660ba83e00c2bef177d87c602d0b5dcf32edc38a.patch
 
 BuildRequires:	meson
 BuildRequires:	enscript
