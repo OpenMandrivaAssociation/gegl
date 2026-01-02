@@ -133,6 +133,8 @@ GObject Introspection interface description for %{name}.
 %autosetup -p1
 
 %build
+export CC=gcc
+export CXX=g++
 # Needed or meson can't find math -lm
 export LDFLAGS="%{optflags} -lm"
 %meson -Dmrg=disabled
