@@ -68,6 +68,8 @@ BuildRequires:  pkgconfig(maxflow)
 BuildRequires:	pkgconfig(OpenEXR) >= 3.1.0
 BuildRequires:  pkgconfig(pango)
 BuildRequires:	pkgconfig(pangocairo)
+# Do not use system poly2tri-c because does not have all needed symbols. If disabled submodules should be used: 
+# https://gitlab.gnome.org/GNOME/gegl/-/issues/451
 #BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:  pkgconfig(poppler-glib)
 BuildRequires:	pkgconfig(pygobject-3.0)
