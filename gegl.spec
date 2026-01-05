@@ -68,7 +68,7 @@ BuildRequires:  pkgconfig(maxflow)
 BuildRequires:	pkgconfig(OpenEXR) >= 3.1.0
 BuildRequires:  pkgconfig(pango)
 BuildRequires:	pkgconfig(pangocairo)
-BuildRequires:	pkgconfig(poly2tri-c)
+#BuildRequires:	pkgconfig(poly2tri-c)
 BuildRequires:  pkgconfig(poppler-glib)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
