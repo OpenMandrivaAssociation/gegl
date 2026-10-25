@@ -75,6 +75,7 @@ BuildRequires:  pkgconfig(poppler-glib)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:  pkgconfig(sdl2)
+BuildRequires:  pkgconfig(sdl3)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  pkgconfig(jasper)
 BuildRequires:  python-gi
